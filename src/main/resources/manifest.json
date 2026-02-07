@@ -1,0 +1,9 @@
+{
+  "Group": "com.example",
+  "Name": "XpBar",
+  "Version": "1.0.2",
+  "Description": "Barra de XP custom (HUD) + comando /xpset",
+  "Authors": [{ "Name": "Thiago" }],
+  "Main": "com.example.xpbar.XpBarPlugin",
+  "IncludesAssetPack": true
+}
