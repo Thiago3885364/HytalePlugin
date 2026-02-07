@@ -33,6 +33,14 @@ public class XpBarPlugin extends JavaPlugin {
 
         getEventRegistry().registerGlobal(PlayerReadyEvent.class, this::onPlayerReady);
         getCommandRegistry().registerCommand(new XpSetCommand(this));
+
+        getCommandRegistry().registerCommand(new com.example.xpbar.SummonCommand());
+
+        XpService xpService = new XpService((playerRef, level) -> {
+            var hud = hudByPlayer.get(playerRef.getUuid());
+            if (hud != null) hud.setLevel(level);
+        });
+        this.getEntityStoreRegistry().registerSystem(new XpOnHitDamageSystem(xpService)); //[3](https://hytalemodding.dev/en/docs/guides/plugin/creating-events)[1](https://hytale-docs.com/docs/modding/plugins/events/damage/damage-event)
     }
 
     private void onPlayerReady(PlayerReadyEvent event) {

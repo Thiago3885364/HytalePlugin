@@ -1,26 +1,37 @@
+@Left = 32;
+@Bottom = 124;
+@BarWidth = 220;
+@BarHeight = 12;
+
 Group {
-  Anchor: (Left: 32, Bottom: 124, Width: 220, Height: 28);
-  LayoutMode: Overlay;
+  Anchor: (Left: @Left, Bottom: @Bottom, Width: @BarWidth, Height: 28);
 
   Group #XpBg {
-    Anchor: (Left: 0, Bottom: 0, Width: 220, Height: 12);
+    Anchor: (Left: 0, Bottom: 0, Width: @BarWidth, Height: @BarHeight);
     Background: #0b1220cc;
     Padding: (Full: 1);
 
+    // ✅ Layout horizontal (left-to-right)
+    LayoutMode: Left;
+
+    // ✅ Parte preenchida (cresce conforme FlexWeight)
     Group #XpFill {
-      Anchor: (Left: 0, Bottom: 0, Width: 0, Height: 12);
+      Anchor: (Height: @BarHeight);
       Background: #1e90ff;
+      FlexWeight: 0;
+    }
+
+    // ✅ Parte vazia (completa o restante)
+    Group #XpEmpty {
+      Anchor: (Height: @BarHeight);
+      Background: #00000000; // transparente
+      FlexWeight: 100;
     }
   }
 
   Label #XpText {
-    Anchor: (Left: 0, Bottom: 14, Width: 220, Height: 14);
+    Anchor: (Left: 0, Bottom: 14, Width: @BarWidth, Height: 14);
     Text: "XP 0/100";
-    Style: (
-      FontSize: 12,
-      TextColor: #9fb7ff,
-      HorizontalAlignment: Start,
-      VerticalAlignment: Center
-    );
+    Style: (FontSize: 12, TextColor: #9fb7ff);
   }
 }
